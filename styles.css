@@ -1,0 +1,47 @@
+/* .english_vc {
+  display: none;
+} */
+
+/* Show examples with the 'active' class */
+/* .english_vc.active {
+display: block;
+} */
+
+.eng_page {
+  background-color: #A3A3A3; /* Button background color */
+  color: #fff; /* Text color */
+  border: none; /* Remove border */
+  padding: 10px 15px; /* Adjust padding as needed */
+  margin: 5px; /* Add spacing between buttons */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+/* Style for the active button */
+.eng_page.active {
+  background-color: #ff9900; /* Active button background color */
+}
+
+
+/* Hide all examples by default */
+.generalization_fr {
+  display: none;
+}
+
+/* Show examples with the 'active' class */
+.generalization_fr.active {
+  display: block;
+}
+
+.cross_page {
+background-color: #A3A3A3; /* Button background color */
+color: #fff; /* Text color */
+border: none; /* Remove border */
+padding: 10px 120px; /* Adjust padding as needed */
+margin: 5px; /* Add spacing between buttons */
+cursor: pointer; /* Change cursor on hover */
+}
+
+/* Style for the active button */
+.cross_page.active {
+background-color: #ff9900; /* Active button background color */
+}
