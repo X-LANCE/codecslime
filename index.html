@@ -405,16 +405,80 @@
 			</center>
 		</div>
 		
-		<!-- <div style="border-top: 2px solid grey;"></div>
+		<div style="border-top: 2px solid grey;"></div>
 		<div class="row">
 			<center>
 				<h3>Ablation Study</h3>
 			</center>
 			<h4>On ScheDFR</h4>
-
+			<p>
+				This section compares different inference-time downsampling strategies on 80 Hz features, all reduced to 40 Hz. 
+				The models differ in whether they apply <strong>ScheDFR</strong> for dynamic frame reduction. 
+				Specifically, both the DFR foundation model (backbone + Melt) and the finetuned model (backbone + Melt + Cool) are evaluated with and without ScheDFR. 
+				The fixed-pattern baselines simply merge every two adjacent frames, while the ScheDFR variants dynamically determine the downsample scheme using the DP-based scheduler.
+			</p>
+			<div class="ablation" data-page="3">
+				<table class="table" style="margin-top: 20px;">
+					<thead>
+						<tr>
+							<th>Ground Truth</th>
+							<th>DFR Foundation Model<br>(80Hz → 40Hz, w/o ScheDFR)</th>
+							<th>DFR Foundation Model<br>(80Hz → 40Hz, w/ ScheDFR)</th>
+							<th>Finetuned Model<br>(80Hz → 40Hz, w/o ScheDFR)</th>
+							<th>Finetuned Model<br>(80Hz → 40Hz, w/ ScheDFR)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<p style="margin-bottom: 4px; font-weight: bold;"><center>Ground Truth</center></p>
+								<audio src="./audio_ready/MR/testsetB-16k/GT/8555_284447_000033_000003.wav" controls="" style="width:200px"></audio>
+								<details style="width:200px">
+								  <summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
+								  Go and capture the first living creature you see, and bring him here to be patched to Cap'n Bill.
+								</details>
+							</td>
+							<td><audio src="./audio_ready/MR/testsetB-16k/DFR_Fdn_FixDS/8555_284447_000033_000003.wav" controls="" style="width:200px"></audio></td>
+							<td><audio src="./audio_ready/MR/testsetB-16k/DFR_Fdn_ScheDFR/8555_284447_000033_000003.wav" controls="" style="width:200px"></audio></td>
+							<td><audio src="./audio_ready/MR/testsetB-16k/FT_FixDS/8555_284447_000033_000003.wav" controls="" style="width:200px"></audio></td>
+							<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime-40Hz/8555_284447_000033_000003.wav" controls="" style="width:200px"></audio></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 			<h4>On Melt-and-Cool</h4>
-			
-		</div> -->
+			<p>
+				This section illustrates the impact of different training strategies under a fixed inference pattern (still 80 Hz → 40 Hz). 
+				All models are based on the same FFR backbone, and only differ in whether they include the <strong>Cool</strong> stage or the full <strong>Melt-and-Cool</strong> recipe during training. 
+			</p>
+			<div class="ablation" data-page="3">
+				<table class="table" style="margin-top: 20px;">
+					<thead>
+						<tr>
+							<th>Ground Truth</th>
+							<th>FFR Backbone Model<br>(w/o Melt-and-Cool)</th>
+							<th>FFR Backbone Model<br>(+ Cool (w/o Melt))</th>
+							<th>FFR Backbone Model<br>(+ Melt-and-Cool)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<p style="margin-bottom: 4px; font-weight: bold;"><center>Ground Truth</center></p>
+								<audio src="./audio_ready/MR/testsetB-16k/GT/8555_284447_000033_000003.wav" controls="" style="width:240px"></audio>
+								<details style="width:240px">
+								  <summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
+								  Go and capture the first living creature you see, and bring him here to be patched to Cap'n Bill.
+								</details>
+							</td>
+							<td><audio src="./audio_ready/MR/testsetB-16k/FFR_Backbone/8555_284447_000033_000003.wav" controls="" style="width:240px"></audio></td>
+							<td><audio src="./audio_ready/MR/testsetB-16k/FFR_Backbone_Cool/8555_284447_000033_000003.wav" controls="" style="width:240px"></audio></td>
+							<td><audio src="./audio_ready/MR/testsetB-16k/FFR_Backbone_MeltAndCool/8555_284447_000033_000003.wav" controls="" style="width:240px"></audio></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 
 		<div style="border-top: 2px solid grey;"></div>
 		<div class="row">
