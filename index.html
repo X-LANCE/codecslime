@@ -1,68 +1,87 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
 
 	<title>CodecSlime</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="styles.css">
 
 	<!-- Latest compiled and minified Bootstrap CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 	<link rel="stylesheet" type="text/css" href="style_examples.css">
 
 </head>
+
 <body>
 
 	<div class="container">
 		<center>
-		<h1>CodecSlime: Temporal Redundancy Compression of Neural Speech Codec via Dynamic Frame Rate</h1>
-		<h4 style="text-align: center">Anonymous Authors</h4>
-		<h4>Submitted to NeurIPS 2025</h4>
-        </center>
-		<div style="border: 1px solid black; margin-top: 20px; margin-bottom: 10px;"></div>
-		<p> Neural speech codecs have been widely used in audio compression and various
-			downstream tasks. Current mainstream codecs are fixed-frame-rate (FFR), which
-			allocate the same number of tokens to every equal-duration slice. However, speech
-			is inherently non-uniform in temporal information density. As a result, many tokens
-			are wasted on steady-state segments like long vowels and silences. To address this
-			mismatch, we present CodecSlime, a plugin-style method for compressing tempo
-		   ral redundancy through supporting dynamic frame rate (DFR) on neural speech
-			codecs for the first time. Our method is unsupervised and architecture-agnostic,
-			combining two key innovations, ScheDFR and Melt-and-Cool, for adapting infer
-		   ence and training, respectively. When integrated into a typical VQ-GAN codec
-			backbone and operating at 40Hz DFR (≈600bps), the reconstruction WER of
-			CodecSlime is reduced by up 46% relative to conventional FFR baselines with
-			the same model architecture and similar bitrates, while other metrics are also
-			competitive. CodecSlime also enables flexible trade-offs between reconstruction
-			quality and bitrate: a single model supports inference at multiple frame rates and
-			consistently outperforms FFR models at the corresponding frame rates.</p>
-		
-		<center>
-			<table>
-				<tbody style="width:100%;">
-					<tr>
-						<td><img src="figures/motivation.png" width="800"></td>
-					</tr>
-				</tbody>
-			</table>
+			<h1>CodecSlime: Temporal Redundancy Compression of Neural Speech Codec via Dynamic Frame Rate</h1>
+			<h4 style="text-align: center">Anonymous Authors</h4>
+			<h4>Submitted to ICASSP 2026</h4>
 		</center>
+
+		<div style="border: 1px solid black; margin-top: 20px; margin-bottom: 10px;"></div>
+
+		<div style="display: flex; align-items: flex-start; gap: 10px;">
+			<!-- 左侧图片 -->
+			<div style="flex: 4;">
+				<center>
+					<img src="figures/opening.png" width="65%">
+				</center>
+			</div>
+
+			<!-- 右侧文字 -->
+			<div style="flex: 3;">
+				<p>
+					Current mainstream neural speech codecs are fixed-frame-rate (FFR),
+					which allocate the same number of tokens to every equal-duration slice.
+					However, speech is inherently non-uniform in temporal information density.
+					As a result, many tokens are wasted on steady-state segments like long vowels and silences.
+					To address this mismatch, we present CodecSlime, a plugin-style method for compressing
+					temporal redundancy through supporting dynamic frame rate (DFR) on neural speech codecs.
+				</p>
+				<p>
+					Our method is unsupervised and architecture-agnostic, combining two key innovations,
+					<strong>ScheDFR</strong> and <strong>Melt-and-Cool</strong>, for adapting inference and training,
+					respectively.
+					When integrated into a typical VQ-GAN codec backbone and operating at 40Hz DFR (≈600bps),
+					the reconstruction WER of CodecSlime is reduced by up to 28% relative to conventional FFR baselines
+					with the same model architecture and similar bitrates, while other metrics are also competitive.
+					CodecSlime also enables flexible trade-offs between reconstruction quality and bitrate:
+					a single model supports inference at multiple frame rates and consistently outperforms FFR models
+					at the corresponding frame rates.
+				</p>
+				<span style="color: gray;">
+					Left figure: Comparison of: (a) conventional 40 Hz fixed-rate model,<br>
+					(b) 80 Hz fixed-rate model with naive fix-rate downsampling, and<br>
+					(c) CodecSlime-integrated model, which combines Melt-and-Cool
+					training with ScheDFR for inference, achieving the lowest WER.
+				</span>
+			</div>
+		</div>
+		<br>
 		<div style="border-top: 2px solid grey;"></div>
 		<div class="row">
 			<center>
-			<h3>Main Results: Speech Reconstruction</h3>
+				<h3>Main Results: Speech Reconstruction</h3>
 			</center>
 			<h4>Testset: LibriTTS test-clean</h4>
 			<p>
-				We compare CodecSlime (40Hz dynamic frame rate, built upon BigCodec) with state-of-the-art neural codecs under ≈40Hz or ≈600bps using the LibriTTS test-clean datasets. 
+				We compare CodecSlime (40Hz dynamic frame rate, built upon BigCodec) with state-of-the-art neural codecs
+				under ≈40Hz or ≈600bps using the LibriTTS test-clean datasets.
 				<!-- For evaluation, we randomly select 20 utterances from 10 speakers.  -->
 				The results are downsampled to 16 kHz for fair comparison.
-				The demo presents audio samples from CodecSlime and baseline methods, showcasing its performance in temporal compression and reconstruction quality. 
-				The numbers in parentheses after model names indicate the encoding bitrate (in kbps) of each model. 
-				Specifically, CodecSlime's bitrate is decoupled into two components: <b>content</b> and <b>duration</b>, each explicitly indicated.
+				The demo presents audio samples from CodecSlime and baseline methods, showcasing its performance in
+				temporal compression and reconstruction quality.
+				The numbers in parentheses after model names indicate the encoding bitrate (in kbps) of each model.
+				Specifically, CodecSlime's bitrate is decoupled into two components: <b>content</b> and <b>duration</b>,
+				each explicitly indicated.
 				For evaluation setup details and comprehensive results, please refer to sections 4 and 5.1 of the paper.
 			</p>
 			<div class="main_res_examples">
@@ -71,7 +90,7 @@
 						<thead>
 							<tr>
 								<th>Ground Truth</th>
-								<th><b>CodecSlime <br/> (0.57 + 0.08)</b></th>
+								<th><b>CodecSlime <br /> (0.57 + 0.08)</b></th>
 								<!-- <th><a href="https://huggingface.co/docs/transformers/model_doc/encodec">EnCodec (1.5)</a></th> -->
 								<th><a href="https://github.com/descriptinc/descript-audio-codec">DAC</a> (1.00)</th>
 								<th><a href="https://github.com/yangdongchao/LLM-Codec">LLM-Codec</a> (0.85)</th>
@@ -81,66 +100,147 @@
 								<th><a href="https://github.com/Aria-K-Alethia/BigCodec">BigCodec</a>-FSQ84k (0.65)</th>
 							</tr>
 						</thead>
-						<tbody id = "lt-testclean" >
+						<tbody id="lt-testclean">
 							<tr>
-								<td><audio src="./audio_ready/MR/testsetB-16k/GT/8555_284447_000033_000003.wav" controls="" style="width:130px"></audio><details><summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-									Go and capture the first living creature you see, and bring him here to be patched to Cap'n Bill.</details></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/GT/8555_284447_000033_000003.wav"
+										controls="" style="width:130px"></audio>
+									<details>
+										<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
+										Go and capture the first living creature you see, and bring him here to be
+										patched to Cap'n Bill.
+									</details>
+								</td>
 								<!-- <td><audio src="./audio_ready/MR/testsetB-16k/prompts/8555_284449_000044_000000.wav" controls="" style="width:130px"></audio></td> -->
-								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime/8555_284447_000033_000003.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/DAC-1k/8555_284447_000033_000003.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/LLM-Codec/8555_284447_000033_000003.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/WavTokenizer/8555_284447_000033_000003.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-VQ18k/8555_284447_000033_000003.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k/8555_284447_000033_000003.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ84k/8555_284447_000033_000003.wav" controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime/8555_284447_000033_000003.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/DAC-1k/8555_284447_000033_000003.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/LLM-Codec/8555_284447_000033_000003.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/WavTokenizer/8555_284447_000033_000003.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-VQ18k/8555_284447_000033_000003.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k/8555_284447_000033_000003.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ84k/8555_284447_000033_000003.wav"
+										controls="" style="width:130px"></audio></td>
 							</tr>
 							<tr>
-								<td><audio src="./audio_ready/MR/testsetB-16k/GT/260_123440_000023_000001.wav" controls="" style="width:130px"></audio><details><summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-									And yet I wish I could show you our cat Dinah: I think you'd take a fancy to cats if you could only see her.</details></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime/260_123440_000023_000001.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/DAC-1k/260_123440_000023_000001.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/LLM-Codec/260_123440_000023_000001.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/WavTokenizer/260_123440_000023_000001.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-VQ18k/260_123440_000023_000001.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k/260_123440_000023_000001.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ84k/260_123440_000023_000001.wav" controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/GT/260_123440_000023_000001.wav"
+										controls="" style="width:130px"></audio>
+									<details>
+										<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
+										And yet I wish I could show you our cat Dinah: I think you'd take a fancy to
+										cats if you could only see her.
+									</details>
+								</td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime/260_123440_000023_000001.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/DAC-1k/260_123440_000023_000001.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/LLM-Codec/260_123440_000023_000001.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/WavTokenizer/260_123440_000023_000001.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-VQ18k/260_123440_000023_000001.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k/260_123440_000023_000001.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ84k/260_123440_000023_000001.wav"
+										controls="" style="width:130px"></audio></td>
 							</tr>
 							<tr>
-								<td><audio src="./audio_ready/MR/testsetB-16k/GT/1284_1180_000045_000002.wav" controls="" style="width:130px"></audio><details><summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-									What is that?" Ojo asked, for this seemed even more strange and unusual than a Glass Cat.</details></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/GT/1284_1180_000045_000002.wav"
+										controls="" style="width:130px"></audio>
+									<details>
+										<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
+										What is that?" Ojo asked, for this seemed even more strange and unusual than a
+										Glass Cat.
+									</details>
+								</td>
 								<!-- <td><audio src="./audio_ready/MR/testsetB-16k/prompts/4992_23283_000004_000000.wav" controls="" style="width:130px"></audio></td> -->
-								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime/1284_1180_000045_000002.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/DAC-1k/1284_1180_000045_000002.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/LLM-Codec/1284_1180_000045_000002.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/WavTokenizer/1284_1180_000045_000002.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-VQ18k/1284_1180_000045_000002.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k/1284_1180_000045_000002.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ84k/1284_1180_000045_000002.wav" controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime/1284_1180_000045_000002.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/DAC-1k/1284_1180_000045_000002.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/LLM-Codec/1284_1180_000045_000002.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/WavTokenizer/1284_1180_000045_000002.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-VQ18k/1284_1180_000045_000002.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k/1284_1180_000045_000002.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ84k/1284_1180_000045_000002.wav"
+										controls="" style="width:130px"></audio></td>
 							</tr>
 							<tr>
-								<td><audio src="./audio_ready/MR/testsetB-16k/GT/1320_122612_000021_000000.wav" controls="" style="width:130px"></audio><details><summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-									"Such cunning is not without its deviltry," exclaimed Hawkeye, when he met the disappointed looks of his assistants.</details></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/GT/1320_122612_000021_000000.wav"
+										controls="" style="width:130px"></audio>
+									<details>
+										<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
+										"Such cunning is not without its deviltry," exclaimed Hawkeye, when he met the
+										disappointed looks of his assistants.
+									</details>
+								</td>
 								<!-- <td><audio src="./audio_ready/MR/testsetB-16k/prompts/4077_13754_000013_000005.wav" controls="" style="width:130px"></audio></td> -->
-								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime/1320_122612_000021_000000.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/DAC-1k/1320_122612_000021_000000.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/LLM-Codec/1320_122612_000021_000000.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/WavTokenizer/1320_122612_000021_000000.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-VQ18k/1320_122612_000021_000000.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k/1320_122612_000021_000000.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ84k/1320_122612_000021_000000.wav" controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime/1320_122612_000021_000000.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/DAC-1k/1320_122612_000021_000000.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/LLM-Codec/1320_122612_000021_000000.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/WavTokenizer/1320_122612_000021_000000.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-VQ18k/1320_122612_000021_000000.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k/1320_122612_000021_000000.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ84k/1320_122612_000021_000000.wav"
+										controls="" style="width:130px"></audio></td>
 							</tr>
-							
+
 							<tr>
-								<td><audio src="./audio_ready/MR/testsetB-16k/GT/5683_32865_000016_000002.wav" controls="" style="width:130px"></audio><details><summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-									It is such a darling little thing; and-look now-is not it magnificent?</details></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/GT/5683_32865_000016_000002.wav"
+										controls="" style="width:130px"></audio>
+									<details>
+										<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
+										It is such a darling little thing; and-look now-is not it magnificent?
+									</details>
+								</td>
 								<!-- <td><audio src="./audio_ready/MR/testsetB-16k/prompts/8230_279154_000004_000008.wav" controls="" style="width:130px"></audio></td> -->
-								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime/5683_32865_000016_000002.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/DAC-1k/5683_32865_000016_000002.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/LLM-Codec/5683_32865_000016_000002.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/WavTokenizer/5683_32865_000016_000002.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-VQ18k/5683_32865_000016_000002.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k/5683_32865_000016_000002.wav" controls="" style="width:130px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ84k/5683_32865_000016_000002.wav" controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime/5683_32865_000016_000002.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/DAC-1k/5683_32865_000016_000002.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/LLM-Codec/5683_32865_000016_000002.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio src="./audio_ready/MR/testsetB-16k/WavTokenizer/5683_32865_000016_000002.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-VQ18k/5683_32865_000016_000002.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k/5683_32865_000016_000002.wav"
+										controls="" style="width:130px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ84k/5683_32865_000016_000002.wav"
+										controls="" style="width:130px"></audio></td>
 							</tr>
 						</tbody>
 					</table>
@@ -149,7 +249,7 @@
 
 			<h4>Testset: LibriSpeech test-clean</h4>
 			<p>
-				We also compared CodecSlime with TS3-Codec, a non-public SOTA codec model. 
+				We also compared CodecSlime with TS3-Codec, a non-public SOTA codec model.
 				The audio samples of TS3-Codec are directly obtained from the authors.
 			</p>
 			<div class="main_res_examples">
@@ -158,52 +258,94 @@
 						<thead>
 							<tr>
 								<th>Ground Truth</th>
-								<th><b>CodecSlime <br/> (0.57 + 0.08)</b></th>
+								<th><b>CodecSlime <br /> (0.57 + 0.08)</b></th>
 								<!-- <th><a href="https://huggingface.co/docs/transformers/model_doc/encodec">EnCodec (1.5)</th> -->
 								<th>TS3-Codec-X3 (0.64)</th>
 								<th>TS3-Codec-X4 (0.68)</th>
 							</tr>
 						</thead>
-						<tbody id = "ls-testclean" >
+						<tbody id="ls-testclean">
 							<tr>
-								<td><audio src="./audio_ready/MR/ls-testclean/GT/5142-33396-0009.wav" controls="" style="width:240px"></audio><details><summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-									"There they stand," so I said, "and glare and hiss at my foes!"</details></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/GT/5142-33396-0009.wav" controls=""
+										style="width:240px"></audio>
+									<details>
+										<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
+										"There they stand," so I said, "and glare and hiss at my foes!"
+									</details>
+								</td>
 								<!-- <td><audio src="./audio_ready/MR/ls-testclean/prompts/8555_284449_000044_000000.wav" controls="" style="width:240px"></audio></td> -->
-								<td><audio src="./audio_ready/MR/ls-testclean/CodecSlime/5142-33396-0009.wav" controls="" style="width:240px"></audio></td>
-								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X3/5142-33396-0009.wav" controls="" style="width:240px"></audio></td>
-								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X4/5142-33396-0009.wav" controls="" style="width:240px"></audio></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/CodecSlime/5142-33396-0009.wav"
+										controls="" style="width:240px"></audio></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X3/5142-33396-0009.wav"
+										controls="" style="width:240px"></audio></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X4/5142-33396-0009.wav"
+										controls="" style="width:240px"></audio></td>
 							</tr>
 							<tr>
-								<td><audio src="./audio_ready/MR/ls-testclean/GT/8555-284447-0001.wav" controls="" style="width:240px"></audio><details><summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-									"Hold him fast, my men! And as soon as I've had my coffee and oatmeal, I'll take him to the Room of the Great Knife and patch him."</details></td>
-								<td><audio src="./audio_ready/MR/ls-testclean/CodecSlime/8555-284447-0001.wav" controls="" style="width:240px"></audio></td>
-								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X3/8555-284447-0001.wav" controls="" style="width:240px"></audio></td>
-								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X4/8555-284447-0001.wav" controls="" style="width:240px"></audio></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/GT/8555-284447-0001.wav" controls=""
+										style="width:240px"></audio>
+									<details>
+										<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
+										"Hold him fast, my men! And as soon as I've had my coffee and oatmeal, I'll take
+										him to the Room of the Great Knife and patch him."
+									</details>
+								</td>
+								<td><audio src="./audio_ready/MR/ls-testclean/CodecSlime/8555-284447-0001.wav"
+										controls="" style="width:240px"></audio></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X3/8555-284447-0001.wav"
+										controls="" style="width:240px"></audio></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X4/8555-284447-0001.wav"
+										controls="" style="width:240px"></audio></td>
 							</tr>
 							<tr>
-								<td><audio src="./audio_ready/MR/ls-testclean/GT/121-121726-0004.wav" controls="" style="width:240px"></audio><details><summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-									Heaven—a good place to be raised to.</details></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/GT/121-121726-0004.wav" controls=""
+										style="width:240px"></audio>
+									<details>
+										<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
+										Heaven—a good place to be raised to.
+									</details>
+								</td>
 								<!-- <td><audio src="./audio_ready/MR/ls-testclean/prompts/4992_23283_000004_000000.wav" controls="" style="width:240px"></audio></td> -->
-								<td><audio src="./audio_ready/MR/ls-testclean/CodecSlime/121-121726-0004.wav" controls="" style="width:240px"></audio></td>
-								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X3/121-121726-0004.wav" controls="" style="width:240px"></audio></td>
-								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X4/121-121726-0004.wav" controls="" style="width:240px"></audio></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/CodecSlime/121-121726-0004.wav"
+										controls="" style="width:240px"></audio></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X3/121-121726-0004.wav"
+										controls="" style="width:240px"></audio></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X4/121-121726-0004.wav"
+										controls="" style="width:240px"></audio></td>
 							</tr>
 							<tr>
-								<td><audio src="./audio_ready/MR/ls-testclean/GT/2961-961-0016.wav" controls="" style="width:240px"></audio><details><summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-									I will briefly describe them to you, and you shall read the account of them at your leisure in the sacred registers.</details></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/GT/2961-961-0016.wav" controls=""
+										style="width:240px"></audio>
+									<details>
+										<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
+										I will briefly describe them to you, and you shall read the account of them at
+										your leisure in the sacred registers.
+									</details>
+								</td>
 								<!-- <td><audio src="./audio_ready/MR/ls-testclean/prompts/4077_13754_000013_000005.wav" controls="" style="width:240px"></audio></td> -->
-								<td><audio src="./audio_ready/MR/ls-testclean/CodecSlime/2961-961-0016.wav" controls="" style="width:240px"></audio></td>
-								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X3/2961-961-0016.wav" controls="" style="width:240px"></audio></td>
-								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X4/2961-961-0016.wav" controls="" style="width:240px"></audio></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/CodecSlime/2961-961-0016.wav" controls=""
+										style="width:240px"></audio></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X3/2961-961-0016.wav"
+										controls="" style="width:240px"></audio></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X4/2961-961-0016.wav"
+										controls="" style="width:240px"></audio></td>
 							</tr>
-							
+
 							<tr>
-								<td><audio src="./audio_ready/MR/ls-testclean/GT/7729-102255-0000.wav" controls="" style="width:240px"></audio><details><summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-									The bogus legislature numbered thirty-six members.</details></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/GT/7729-102255-0000.wav" controls=""
+										style="width:240px"></audio>
+									<details>
+										<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
+										The bogus legislature numbered thirty-six members.
+									</details>
+								</td>
 								<!-- <td><audio src="./audio_ready/MR/ls-testclean/prompts/8230_279154_000004_000008.wav" controls="" style="width:240px"></audio></td> -->
-								<td><audio src="./audio_ready/MR/ls-testclean/CodecSlime/7729-102255-0000.wav" controls="" style="width:240px"></audio></td>
-								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X3/7729-102255-0000.wav" controls="" style="width:240px"></audio></td>
-								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X4/7729-102255-0000.wav" controls="" style="width:240px"></audio></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/CodecSlime/7729-102255-0000.wav"
+										controls="" style="width:240px"></audio></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X3/7729-102255-0000.wav"
+										controls="" style="width:240px"></audio></td>
+								<td><audio src="./audio_ready/MR/ls-testclean/TS3-Codec-X4/7729-102255-0000.wav"
+										controls="" style="width:240px"></audio></td>
 							</tr>
 						</tbody>
 					</table>
@@ -221,43 +363,54 @@
 		<div style="border-top: 2px solid grey;"></div>
 		<div class="row">
 			<center>
-			<h3>Generalization Ability: One Model For Various Average Frame Rates</h3>
+				<h3>Generalization Ability: One Model For Various Average Frame Rates</h3>
 			</center>
 
 			<p>
-				This experiment evaluates how well <strong>a single CodecSlime model</strong> generalizes across different inference frame rates. 
-				The same CodecSlime model, fine-tuned once at 40 Hz using ScheDFR, is tested under multiple runtime configurations. 
-				In contrast, <strong>the fixed-rate FFR baselines are individually trained for each specific frame rate</strong> (40, 50, 67, and 80 Hz).
-				All models share the same backbone architecture (except for the CNN downsampling rate) and the same quantizer configuration (FSQ with 18225 codes).
-				As shown below, higher frame rates lead to lower WER and higher STOI for all models. 
-				However, CodecSlime consistently outperforms all FFR variants, demonstrating strong generalization and eliminating the need for retraining at each target rate.
+				This experiment evaluates how well <strong>a single CodecSlime model</strong> generalizes across
+				different inference frame rates.
+				The same CodecSlime model, fine-tuned once at 40 Hz using ScheDFR, is tested under multiple runtime
+				configurations.
+				In contrast, <strong>the fixed-rate FFR baselines are individually trained for each specific frame
+					rate</strong> (40, 50, 67, and 80 Hz).
+				All models share the same backbone architecture (except for the CNN downsampling rate) and the same
+				quantizer configuration (FSQ with 18225 codes).
+				As shown below, higher frame rates lead to lower WER and higher PESQ.
+				However, CodecSlime consistently outperforms the FFR baseline, demonstrating strong generalization and
+				eliminating the need for retraining at each target rate.
 			</p>
-				
+
 			<center>
 				<table>
 					<tbody style="width:100%;">
 						<tr>
-							<td><img src="figures/wer_stoi_vs_frame_rate_with_ffr.png" width="600"></td>
+							<td><img src="figures/wer_pesq_vs_frame_rate_with_ffr_fsq.png" width="600"></td>
 						</tr>
 					</tbody>
 				</table>
 			</center>
-			
+
 			<p>
-			This interactive table compares audio reconstructions from CodecSlime and FFR baselines across varying inference frame rates. 
-			The same CodecSlime model is used throughout, with only the frame rate adjusted at test time. 
-			In contrast, each FFR variant is separately trained for its target frame rate.
-			We provide 3 utterances from LibriTTS test-clean set, and you can pick any of them through the buttons below.
+				This interactive table compares audio reconstructions from CodecSlime and FFR baselines across varying
+				inference frame rates.
+				The same CodecSlime model is used throughout, with only the frame rate adjusted at test time.
+				In contrast, each FFR variant is separately trained for its target frame rate.
+				We provide 3 utterances from LibriTTS test-clean set, and you can pick any of them through the buttons
+				below.
 			</p>
 
 			<div class="generalization_fr_examples">
 				<div class="generalization_fr" data-page="1">
 					<td>
-						<p style="margin-bottom: 4px; font-weight: bold;"><center>Ground Truth</center></p>
-						<audio src="./audio_ready/MR/testsetB-16k/GT/8555_284447_000033_000003.wav" controls="" style="width:400px"></audio>
+						<p style="margin-bottom: 4px; font-weight: bold;">
+							<center>Ground Truth</center>
+						</p>
+						<audio src="./audio_ready/MR/testsetB-16k/GT/8555_284447_000033_000003.wav" controls=""
+							style="width:400px"></audio>
 						<details style="width:400px">
-						  <summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-						  Go and capture the first living creature you see, and bring him here to be patched to Cap'n Bill.
+							<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
+							Go and capture the first living creature you see, and bring him here to be patched to Cap'n
+							Bill.
 						</details>
 					</td>
 					<table class="table" style="margin-top: 20px;">
@@ -274,26 +427,42 @@
 							<tr>
 								<td>40</td>
 								<td>0.57</td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime-40Hz/8555_284447_000033_000003.wav" controls="" style="width:300px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-40Hz/8555_284447_000033_000003.wav" controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/CodecSlime-40Hz/8555_284447_000033_000003.wav"
+										controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-40Hz/8555_284447_000033_000003.wav"
+										controls="" style="width:300px"></audio></td>
 							</tr>
 							<tr>
 								<td>50</td>
 								<td>0.71</td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime-50Hz/8555_284447_000033_000003.wav" controls="" style="width:300px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-50Hz/8555_284447_000033_000003.wav" controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/CodecSlime-50Hz/8555_284447_000033_000003.wav"
+										controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-50Hz/8555_284447_000033_000003.wav"
+										controls="" style="width:300px"></audio></td>
 							</tr>
 							<tr>
 								<td>67</td>
 								<td>0.95</td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime-67Hz/8555_284447_000033_000003.wav" controls="" style="width:300px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-67Hz/8555_284447_000033_000003.wav" controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/CodecSlime-67Hz/8555_284447_000033_000003.wav"
+										controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-67Hz/8555_284447_000033_000003.wav"
+										controls="" style="width:300px"></audio></td>
 							</tr>
 							<tr>
 								<td>80</td>
 								<td>1.13</td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime-80Hz/8555_284447_000033_000003.wav" controls="" style="width:300px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-80Hz/8555_284447_000033_000003.wav" controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/CodecSlime-80Hz/8555_284447_000033_000003.wav"
+										controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-80Hz/8555_284447_000033_000003.wav"
+										controls="" style="width:300px"></audio></td>
 							</tr>
 						</tbody>
 					</table>
@@ -301,11 +470,15 @@
 
 				<div class="generalization_fr" data-page="2">
 					<td>
-						<p style="margin-bottom: 4px; font-weight: bold;"><center>Ground Truth</center></p>
-						<audio src="./audio_ready/MR/testsetB-16k/GT/260_123440_000023_000001.wav" controls="" style="width:400px"></audio>
+						<p style="margin-bottom: 4px; font-weight: bold;">
+							<center>Ground Truth</center>
+						</p>
+						<audio src="./audio_ready/MR/testsetB-16k/GT/260_123440_000023_000001.wav" controls=""
+							style="width:400px"></audio>
 						<details style="width:400px">
-						  <summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-						  And yet I wish I could show you our cat Dinah: I think you'd take a fancy to cats if you could only see her.
+							<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
+							And yet I wish I could show you our cat Dinah: I think you'd take a fancy to cats if you
+							could only see her.
 						</details>
 					</td>
 					<table class="table" style="margin-top: 20px;">
@@ -322,26 +495,42 @@
 							<tr>
 								<td>40</td>
 								<td>0.57</td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime-40Hz/260_123440_000023_000001.wav" controls="" style="width:300px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-40Hz/260_123440_000023_000001.wav" controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/CodecSlime-40Hz/260_123440_000023_000001.wav"
+										controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-40Hz/260_123440_000023_000001.wav"
+										controls="" style="width:300px"></audio></td>
 							</tr>
 							<tr>
 								<td>50</td>
 								<td>0.71</td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime-50Hz/260_123440_000023_000001.wav" controls="" style="width:300px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-50Hz/260_123440_000023_000001.wav" controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/CodecSlime-50Hz/260_123440_000023_000001.wav"
+										controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-50Hz/260_123440_000023_000001.wav"
+										controls="" style="width:300px"></audio></td>
 							</tr>
 							<tr>
 								<td>67</td>
 								<td>0.95</td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime-67Hz/260_123440_000023_000001.wav" controls="" style="width:300px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-67Hz/260_123440_000023_000001.wav" controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/CodecSlime-67Hz/260_123440_000023_000001.wav"
+										controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-67Hz/260_123440_000023_000001.wav"
+										controls="" style="width:300px"></audio></td>
 							</tr>
 							<tr>
 								<td>80</td>
 								<td>1.13</td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime-80Hz/260_123440_000023_000001.wav" controls="" style="width:300px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-80Hz/260_123440_000023_000001.wav" controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/CodecSlime-80Hz/260_123440_000023_000001.wav"
+										controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-80Hz/260_123440_000023_000001.wav"
+										controls="" style="width:300px"></audio></td>
 							</tr>
 						</tbody>
 					</table>
@@ -349,11 +538,14 @@
 
 				<div class="generalization_fr" data-page="3">
 					<td>
-						<p style="margin-bottom: 4px; font-weight: bold;"><center>Ground Truth</center></p>
-						<audio src="./audio_ready/MR/testsetB-16k/GT/1284_1180_000045_000002.wav" controls="" style="width:400px"></audio>
+						<p style="margin-bottom: 4px; font-weight: bold;">
+							<center>Ground Truth</center>
+						</p>
+						<audio src="./audio_ready/MR/testsetB-16k/GT/1284_1180_000045_000002.wav" controls=""
+							style="width:400px"></audio>
 						<details style="width:400px">
-						  <summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-						  What is that?" Ojo asked, for this seemed even more strange and unusual than a Glass Cat.
+							<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
+							What is that?" Ojo asked, for this seemed even more strange and unusual than a Glass Cat.
 						</details>
 					</td>
 					<table class="table" style="margin-top: 20px;">
@@ -370,26 +562,42 @@
 							<tr>
 								<td>40</td>
 								<td>0.57</td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime-40Hz/1284_1180_000045_000002.wav" controls="" style="width:300px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-40Hz/1284_1180_000045_000002.wav" controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/CodecSlime-40Hz/1284_1180_000045_000002.wav"
+										controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-40Hz/1284_1180_000045_000002.wav"
+										controls="" style="width:300px"></audio></td>
 							</tr>
 							<tr>
 								<td>50</td>
 								<td>0.71</td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime-50Hz/1284_1180_000045_000002.wav" controls="" style="width:300px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-50Hz/1284_1180_000045_000002.wav" controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/CodecSlime-50Hz/1284_1180_000045_000002.wav"
+										controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-50Hz/1284_1180_000045_000002.wav"
+										controls="" style="width:300px"></audio></td>
 							</tr>
 							<tr>
 								<td>67</td>
 								<td>0.95</td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime-67Hz/1284_1180_000045_000002.wav" controls="" style="width:300px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-67Hz/1284_1180_000045_000002.wav" controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/CodecSlime-67Hz/1284_1180_000045_000002.wav"
+										controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-67Hz/1284_1180_000045_000002.wav"
+										controls="" style="width:300px"></audio></td>
 							</tr>
 							<tr>
 								<td>80</td>
 								<td>1.13</td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime-80Hz/1284_1180_000045_000002.wav" controls="" style="width:300px"></audio></td>
-								<td><audio src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-80Hz/1284_1180_000045_000002.wav" controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/CodecSlime-80Hz/1284_1180_000045_000002.wav"
+										controls="" style="width:300px"></audio></td>
+								<td><audio
+										src="./audio_ready/MR/testsetB-16k/BigCodec-FSQ18k-80Hz/1284_1180_000045_000002.wav"
+										controls="" style="width:300px"></audio></td>
 							</tr>
 						</tbody>
 					</table>
@@ -397,14 +605,15 @@
 			</div>
 
 			<center>
-				<div id="generalization-fr-pagination" style="width:30%; display: flex; justify-content: center; gap: 10px;">
+				<div id="generalization-fr-pagination"
+					style="width:30%; display: flex; justify-content: center; gap: 10px;">
 					<button class="cross_page" data-page="1" style="font-size: 16px">8555_284447_000033_000003</button>
 					<button class="cross_page" data-page="2" style="font-size: 16px">260_123440_000023_000001</button>
 					<button class="cross_page" data-page="3" style="font-size: 16px">1284_1180_000045_000002</button>
 				</div>
 			</center>
 		</div>
-		
+
 		<div style="border-top: 2px solid grey;"></div>
 		<div class="row">
 			<center>
@@ -412,10 +621,13 @@
 			</center>
 			<h4>On ScheDFR</h4>
 			<p>
-				This section compares different inference-time downsampling strategies on 80 Hz features, all reduced to 40 Hz. 
-				The models differ in whether they apply <strong>ScheDFR</strong> for dynamic frame reduction. 
-				Specifically, both the DFR foundation model (backbone + Melt) and the finetuned model (backbone + Melt + Cool) are evaluated with and without ScheDFR. 
-				The fixed-pattern baselines simply merge every two adjacent frames, while the ScheDFR variants dynamically determine the downsample scheme using the DP-based scheduler.
+				This section compares different inference-time downsampling strategies on 80 Hz features, all reduced to
+				40 Hz.
+				The models differ in whether they apply <strong>ScheDFR</strong> for dynamic frame reduction.
+				Specifically, both the DFR foundation model (backbone + Melt) and the finetuned model (backbone + Melt +
+				Cool) are evaluated with and without ScheDFR.
+				The fixed-pattern baselines simply merge every two adjacent frames, while the ScheDFR variants
+				dynamically determine the downsample scheme using the DP-based scheduler.
 			</p>
 			<div class="ablation" data-page="3">
 				<table class="table" style="margin-top: 20px;">
@@ -431,25 +643,35 @@
 					<tbody>
 						<tr>
 							<td>
-								<p style="margin-bottom: 4px; font-weight: bold;"><center>Ground Truth</center></p>
-								<audio src="./audio_ready/MR/testsetB-16k/GT/8555_284447_000033_000003.wav" controls="" style="width:200px"></audio>
+								<p style="margin-bottom: 4px; font-weight: bold;">
+									<center>Ground Truth</center>
+								</p>
+								<audio src="./audio_ready/MR/testsetB-16k/GT/8555_284447_000033_000003.wav" controls=""
+									style="width:200px"></audio>
 								<details style="width:200px">
-								  <summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-								  Go and capture the first living creature you see, and bring him here to be patched to Cap'n Bill.
+									<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
+									Go and capture the first living creature you see, and bring him here to be patched
+									to Cap'n Bill.
 								</details>
 							</td>
-							<td><audio src="./audio_ready/MR/testsetB-16k/DFR_Fdn_FixDS/8555_284447_000033_000003.wav" controls="" style="width:200px"></audio></td>
-							<td><audio src="./audio_ready/MR/testsetB-16k/DFR_Fdn_ScheDFR/8555_284447_000033_000003.wav" controls="" style="width:200px"></audio></td>
-							<td><audio src="./audio_ready/MR/testsetB-16k/FT_FixDS/8555_284447_000033_000003.wav" controls="" style="width:200px"></audio></td>
-							<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime-40Hz/8555_284447_000033_000003.wav" controls="" style="width:200px"></audio></td>
+							<td><audio src="./audio_ready/MR/testsetB-16k/DFR_Fdn_FixDS/8555_284447_000033_000003.wav"
+									controls="" style="width:200px"></audio></td>
+							<td><audio src="./audio_ready/MR/testsetB-16k/DFR_Fdn_ScheDFR/8555_284447_000033_000003.wav"
+									controls="" style="width:200px"></audio></td>
+							<td><audio src="./audio_ready/MR/testsetB-16k/FT_FixDS/8555_284447_000033_000003.wav"
+									controls="" style="width:200px"></audio></td>
+							<td><audio src="./audio_ready/MR/testsetB-16k/CodecSlime-40Hz/8555_284447_000033_000003.wav"
+									controls="" style="width:200px"></audio></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<h4>On Melt-and-Cool</h4>
 			<p>
-				This section illustrates the impact of different training strategies under a unified inference configuration (still 80 Hz → 40 Hz, with ScheDFR consistently applied). 
-				All models are based on the same FFR backbone, and only differ in whether they include the <strong>Cool</strong> stage or the full <strong>Melt-and-Cool</strong> recipe during training. 
+				This section illustrates the impact of different training strategies under a unified inference
+				configuration (still 80 Hz → 40 Hz, with ScheDFR consistently applied).
+				All models are based on the same FFR backbone, and only differ in whether they include the
+				<strong>Cool</strong> stage or the full <strong>Melt-and-Cool</strong> recipe during training.
 			</p>
 			<div class="ablation" data-page="3">
 				<table class="table" style="margin-top: 20px;">
@@ -464,16 +686,25 @@
 					<tbody>
 						<tr>
 							<td>
-								<p style="margin-bottom: 4px; font-weight: bold;"><center>Ground Truth</center></p>
-								<audio src="./audio_ready/MR/testsetB-16k/GT/8555_284447_000033_000003.wav" controls="" style="width:240px"></audio>
+								<p style="margin-bottom: 4px; font-weight: bold;">
+									<center>Ground Truth</center>
+								</p>
+								<audio src="./audio_ready/MR/testsetB-16k/GT/8555_284447_000033_000003.wav" controls=""
+									style="width:240px"></audio>
 								<details style="width:240px">
-								  <summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-								  Go and capture the first living creature you see, and bring him here to be patched to Cap'n Bill.
+									<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
+									Go and capture the first living creature you see, and bring him here to be patched
+									to Cap'n Bill.
 								</details>
 							</td>
-							<td><audio src="./audio_ready/MR/testsetB-16k/FFR_Backbone/8555_284447_000033_000003.wav" controls="" style="width:240px"></audio></td>
-							<td><audio src="./audio_ready/MR/testsetB-16k/FFR_Backbone_Cool/8555_284447_000033_000003.wav" controls="" style="width:240px"></audio></td>
-							<td><audio src="./audio_ready/MR/testsetB-16k/FFR_Backbone_MeltAndCool/8555_284447_000033_000003.wav" controls="" style="width:240px"></audio></td>
+							<td><audio src="./audio_ready/MR/testsetB-16k/FFR_Backbone/8555_284447_000033_000003.wav"
+									controls="" style="width:240px"></audio></td>
+							<td><audio
+									src="./audio_ready/MR/testsetB-16k/FFR_Backbone_Cool/8555_284447_000033_000003.wav"
+									controls="" style="width:240px"></audio></td>
+							<td><audio
+									src="./audio_ready/MR/testsetB-16k/FFR_Backbone_MeltAndCool/8555_284447_000033_000003.wav"
+									controls="" style="width:240px"></audio></td>
 						</tr>
 					</tbody>
 				</table>
@@ -486,16 +717,22 @@
 				<h3>DFR Scheduling: Case Study</h3>
 			</center>
 			<p>
-			The figure below visually illustrates how the CodecSlime DFR scheduler operates on the 237_126133_000002_000004 utterance from the LibriTTS test-clean set.
-			The top waveform aligns with the forced phoneme sequence, while the black-and-white bar below depicts the model's predicted frame-reduction pattern.
-			Here, the target downsample rate is 2, and the maximum downsample segment length is 4.
+				The figure below visually illustrates how the CodecSlime DFR scheduler operates on the
+				237_126133_000002_000004 utterance from the LibriTTS test-clean set.
+				The top waveform aligns with the forced phoneme sequence, while the black-and-white bar below depicts
+				the model's predicted frame-reduction pattern.
+				Here, the target downsample rate is 2, and the maximum downsample segment length is 4.
 			</p>
 			<p>
-			As shown, the scheduler adaptively merges frames in regions of long pauses or steady vowels, effectively exploiting temporal redundancy.
-			It also captures "counterintuitive" compression strategies across phoneme boundaries when beneficial for reconstruction.
-			This example highlights CodecSlime's strength: instead of relying on handcrafted heuristics, it plans downsampling directly from the learned representation space—enabling big bitrate reduction while preserving perceptual quality.
+				As shown, the scheduler adaptively merges frames in regions of long pauses or steady vowels, effectively
+				exploiting temporal redundancy.
+				It also captures "counterintuitive" compression strategies across phoneme boundaries when beneficial for
+				reconstruction.
+				This example highlights CodecSlime's strength: instead of relying on handcrafted heuristics, it plans
+				downsampling directly from the learned representation space—enabling big bitrate reduction while
+				preserving perceptual quality.
 			</p>
-			<p>For more examples, please refer to <b>the Appendix of our paper (in the supplementary material)</b>.</p>
+			<!-- <p>For more examples, please refer to <b>the Appendix of our paper (in the supplementary material)</b>.</p> -->
 			<center>
 				<table>
 					<tbody style="width:100%;">
@@ -505,14 +742,14 @@
 					</tbody>
 				</table>
 			</center>
-			
+
 		</div>
 
 
 	</div>
 	<hr>
-	</body>
-	
+</body>
+
 <script src="script.js"></script>
 
 </html>
