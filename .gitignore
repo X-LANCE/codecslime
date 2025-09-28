@@ -1,3 +1,4 @@
 *.tmp
 *.backup.*
 ICASSP_26__*
+*.old
