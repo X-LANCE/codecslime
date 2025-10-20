@@ -199,96 +199,36 @@
 
 			<h4>Testset: LibriSpeech test-clean</h4>
 			<p>
-				We also compared CodecSlime with TS3-Codec, a non-public SOTA codec model.
-				The audio samples of TS3-Codec are directly obtained from the authors.
+				We also evaluated CodecSlime on the LibriSpeech test-clean dataset to further validate its performance.
+				The results are split into two sections based on the quantizer type used: VQ-based and FSQ-based.
+				CodecSlime consistently outperforms the BigCodec baselines in both categories, achieving lower WER and 
+				higher intelligibility and quality metrics.
 			</p>
-			<div class="main_res_examples">
-				<div class="main_res_examples" data-page="1">
-					<table class="table" style="margin-top: 20px;">
-						<thead>
-							<tr>
-								<th>Ground Truth</th>
-								<th><b>CodecSlime-VQ8k <br /> (0.52 + 0.08)</b></th>
-								<th><b>CodecSlime-FSQ18k <br /> (0.57 + 0.08)</b></th>
-								<!-- <th><a href="https://huggingface.co/docs/transformers/model_doc/encodec">EnCodec (1.5)</th> -->
-								<th>TS3-Codec (X3) (0.64)</th>
-								<th>TS3-Codec (X4) (0.68)</th>
-							</tr>
-						</thead>
-						<tbody id="ls-testclean">
-							<tr class="utterance" data-utt-id="1089-134686-0005" data-testset="ls-testclean">
-								<td><audio data-codec="GT" controls style="width:240px"></audio>
-									<details>
-										<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-										<span class="transcript"></span>
-									</details>
-								</td>
-								<td><audio data-codec="CodecSlime-VQ8k" controls style="width:160px"></audio></td>
-								<td><audio data-codec="CodecSlime-FSQ18k" controls style="width:160px"></audio></td>
-								<td><audio data-codec="TS3-Codec (X3)" controls style="width:160px"></audio></td>
-								<td><audio data-codec="TS3-Codec (X4)" controls style="width:160px"></audio></td>
-							</tr>
-							<tr class="utterance" data-utt-id="5142-33396-0006" data-testset="ls-testclean">
-								<td><audio data-codec="GT" controls style="width:240px"></audio>
-									<details>
-										<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-										<span class="transcript"></span>
-									</details>
-								</td>
-								<td><audio data-codec="CodecSlime-VQ8k" controls style="width:160px"></audio></td>
-								<td><audio data-codec="CodecSlime-FSQ18k" controls style="width:160px"></audio></td>
-								<td><audio data-codec="TS3-Codec (X3)" controls style="width:160px"></audio></td>
-								<td><audio data-codec="TS3-Codec (X4)" controls style="width:160px"></audio></td>
-							</tr>
-							<tr class="utterance" data-utt-id="121-123859-0003" data-testset="ls-testclean">
-								<td><audio data-codec="GT" controls style="width:240px"></audio>
-									<details>
-										<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-										<span class="transcript"></span>
-									</details>
-								</td>
-								<td><audio data-codec="CodecSlime-VQ8k" controls style="width:160px"></audio></td>
-								<td><audio data-codec="CodecSlime-FSQ18k" controls style="width:160px"></audio></td>
-								<td><audio data-codec="TS3-Codec (X3)" controls style="width:160px"></audio></td>
-								<td><audio data-codec="TS3-Codec (X4)" controls style="width:160px"></audio></td>
-							</tr>
-							<tr class="utterance" data-utt-id="5105-28241-0017" data-testset="ls-testclean">
-								<td><audio data-codec="GT" controls style="width:240px"></audio>
-									<details>
-										<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-										<span class="transcript"></span>
-									</details>
-								</td>
-								<td><audio data-codec="CodecSlime-VQ8k" controls style="width:160px"></audio></td>
-								<td><audio data-codec="CodecSlime-FSQ18k" controls style="width:160px"></audio></td>
-								<td><audio data-codec="TS3-Codec (X3)" controls style="width:160px"></audio></td>
-								<td><audio data-codec="TS3-Codec (X4)" controls style="width:160px"></audio></td>
-							</tr>
-							<tr class="utterance" data-utt-id="6829-68771-0004" data-testset="ls-testclean">
-								<td><audio data-codec="GT" controls style="width:240px"></audio>
-									<details>
-										<summary style="cursor: pointer; color: #76b900;">[Show transcript]</summary>
-										<span class="transcript"></span>
-									</details>
-								</td>
-								<td><audio data-codec="CodecSlime-VQ8k" controls style="width:160px"></audio></td>
-								<td><audio data-codec="CodecSlime-FSQ18k" controls style="width:160px"></audio></td>
-								<td><audio data-codec="TS3-Codec (X3)" controls style="width:160px"></audio></td>
-								<td><audio data-codec="TS3-Codec (X4)" controls style="width:160px"></audio></td>
-							</tr>
-							
-						</tbody>
-					</table>
-				</div>
-			</div>
+			<table>
+				<tr>
+					<th>Model</th><th>Bitrate (kbps)</th><th>WER</th><th>STOI</th><th>PESQ</th>
+					<th>SECS</th><th>UTMOS</th><th>ViSQOL</th>
+				</tr>
+				<tr><td>GT</td><td></td><td>1.67</td><td>1.000</td><td>4.64</td><td>1.000</td><td>4.07</td><td>5.00</td></tr>
+				<tr class="double-line"><td colspan="8"></td></tr>
+				<tr><td>BigCodec-VQ8128</td><td>0.52</td><td>5.00</td><td>0.885</td><td>1.99</td><td>0.920</td><td>3.95</td><td>3.83</td></tr>
+				<tr class="gray"><td>BigCodec-VQ18k</td><td>0.57</td><td>4.56</td><td>0.890</td><td>2.03</td><td>0.924</td><td>3.97</td><td>3.86</td></tr>
+				<tr><td>CodecSlime-VQ8192</td><td>0.52+0.08</td><td><b>4.38</b></td><td><b>0.895</b></td><td><b>2.07</b></td>
+					<td><b>0.933</b></td><td><b>4.00</b></td><td><b>3.89</b></td></tr>
+				<tr class="double-line"><td colspan="8"></td></tr>
+				<tr><td>BigCodec-FSQ18k</td><td>0.57</td><td>5.48</td><td>0.883</td><td>1.94</td><td>0.905</td><td>3.81</td><td>3.85</td></tr>
+				<tr class="gray"><td>BigCodec-FSQ84k</td><td>0.65</td><td>4.25</td><td>0.893</td><td><b>2.06</b></td><td>0.914</td><td>3.96</td><td><b>3.89</b></td></tr>
+				<tr><td>CodecSlime-FSQ18k</td><td>0.57+0.08</td><td><b>4.24</b></td><td><b>0.895</b></td><td>2.03</td><td><b>0.914</b></td><td><b>4.01</b></td><td>3.84</td></tr>
+			</table>
 		</div>
 
 		<div style="border-top: 2px solid grey;"></div>
 		<div class="row">
 			<center>
-				<h3>Generalization Ability: One Model For Various Average Frame Rates</h3>
+				<h3>Generalization Ability</h3>
 			</center>
-
+			
+			<h4>One model for various frame rates at inference time</h4>
 			<p>
 				This experiment evaluates how well <strong>a single CodecSlime model</strong> generalizes across
 				different inference frame rates.
@@ -468,6 +408,31 @@
 					<button class="cross_page" data-page="3" style="font-size: 16px">237_134500_000036_000003</button>
 				</div>
 			</center>
+
+			<h4>Testset of unseen languages: MLS subset</h4>
+			<p>
+				MLS subset includes 210 randomly selected dev/test utterances from Multi-lingual LibriSpeech covering major Western languages
+				which are not covered in the training set. The results shows that CodecSlime also generalizes well to unseen languages in both
+				VQ and FSQ settings.
+			</p>
+			<table>
+				<tr>
+					<th>Model</th><th>Bitrate (kbps)</th><th>WER</th><th>STOI</th><th>PESQ</th>
+					<th>SECS</th><th>UTMOS</th><th>ViSQOL</th>
+				</tr>
+				<tr><td>GT</td><td></td><td>8.70</td><td>1.000</td><td>4.64</td><td>1.000</td><td>2.80</td><td>5.00</td></tr>
+				<tr class="double-line"><td colspan="8"></td></tr>
+				<tr><td>BigCodec-VQ8192</td><td>0.52</td><td>36.20</td><td>0.859</td><td>1.79</td><td>0.929</td><td>2.71</td><td>3.71</td></tr>
+				<tr class="gray"><td>BigCodec-VQ18k</td><td>0.57</td><td>31.19</td><td>0.872</td><td>1.90</td><td>0.937</td><td><b>2.75</b></td><td>3.80</td></tr>
+				<tr><td>CodecSlime-VQ8192</td><td>0.52+0.08</td><td><b>28.80</b></td><td><b>0.874</b></td><td><b>1.92</b></td>
+					<td><b>0.951</b></td><td>2.74</td><td><b>3.83</b></td></tr>
+				<tr class="double-line"><td colspan="8"></td></tr>
+				<tr><td>BigCodec-FSQ18k</td><td>0.57</td><td>35.74</td><td>0.861</td><td>1.82</td><td><b>0.942</b></td><td>2.69</td><td>3.74</td></tr>
+				<tr class="gray"><td>BigCodec-FSQ84k</td><td>0.65</td><td><b>32.23</b></td><td>0.865</td><td>1.86</td><td><b>0.942</b></td><td>2.72</td><td><b>3.77</b></td></tr>
+				<tr><td>CodecSlime-FSQ18k</td><td>0.57+0.08</td><td>32.42</td><td><b>0.877</b></td><td><b>1.91</b></td>
+					<td>0.935</td><td><b>2.86</b></td><td>3.77</td></tr>
+			</table>
+			
 		</div>
 
 		<div style="border-top: 2px solid grey;"></div>

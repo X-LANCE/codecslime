@@ -45,3 +45,14 @@ cursor: pointer; /* Change cursor on hover */
 .cross_page.active {
 background-color: #ff9900; /* Active button background color */
 }
+
+table { border-collapse: collapse; width: 100%; margin-bottom: 25px; }
+th { border: 1px solid #ccc; padding: 2px 6px; text-align: center; line-height: 2.0; background: #f2f2f2; }
+td { border: 1px solid #ccc; padding: 2px 6px; text-align: center; line-height: 1.0 }
+.gray { color: gray; font-style: italic; }
+
+.double-line td {
+  border-bottom: 3px #000;
+  height: 0;                
+  padding: 0;
+}
