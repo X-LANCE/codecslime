@@ -549,6 +549,38 @@
 
 		</div>
 
+		
+		<div style="border-top: 2px solid grey;"></div>
+		<div class="row">
+			<center>
+				<h3>Illustration of Melt-and-Cool</h3>
+			</center>
+			<p>
+				Our Melt-and-Cool recipe adapts an FFR backbone to ScheDFR using a simple two-stage process. 
+				Starting from the pretrained fix-frame-rate model <b>(①)</b>, 
+			</p>
+			<p>
+				the Melt phase introduces random temporal downsampling on the encoder features <b>(②)</b>, 
+				controlled by a scheduler that adjusts the sampling proportion over training <b>(③)</b>. 
+				This produces a DFR foundation model that supports many downsampling patterns <b>(④)</b>. 
+			</p>
+			<p>
+				In the Cool phase, we fine-tune this model with DP-computed optimal schemes <b>(⑤)</b>, 
+				freezing the encoder and updating only the quantizer and decoder to stabilize learning. 
+				The final result is a DFR model fine-tuned for the target ScheDFR setup <b>(⑥)</b>.
+			</p>
+			<!-- <p>For more examples, please refer to <b>the Appendix of our paper (in the supplementary material)</b>.</p> -->
+			<center>
+				<table>
+					<tbody style="width:100%;">
+						<tr>
+							<td><img src="figures/melt-and-cool-illu.png" width="900"></td>
+						</tr>
+					</tbody>
+				</table>
+			</center>
+
+		</div>
 
 	</div>
 	<hr>
