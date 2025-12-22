@@ -63,11 +63,29 @@
 				</span>
 			</div>
 		</div>
+
+		<!-- Table of Contents -->
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-md-12">
+				<div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px; border: 1px solid #e9ecef;">
+					<h4 style="margin-top: 0;">Table of Contents</h4>
+					<ul>
+						<li><a href="#main-results">Main Results: Speech Reconstruction</a></li>
+						<li><a href="#generalization">Generalization Ability</a></li>
+						<li><a href="#ablation">Ablation Study</a></li>
+						<li><a href="#case-study">DFR Scheduling: Case Study</a></li>
+						<li><a href="#melt-and-cool">Illustration of Melt-and-Cool</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
 		<br>
 		<div style="border-top: 2px solid grey;"></div>
+
 		<div class="row">
 			<center>
-				<h3>Main Results: Speech Reconstruction</h3>
+				<h3 id="main-results">Main Results: Speech Reconstruction</h3>
 			</center>
 			<h4>Testset: LibriTTS test-clean</h4>
 			<p>
@@ -225,7 +243,7 @@
 		<div style="border-top: 2px solid grey;"></div>
 		<div class="row">
 			<center>
-				<h3>Generalization Ability</h3>
+				<h3 id="generalization">Generalization Ability</h3>
 			</center>
 			
 			<h4>One model for various frame rates at inference time</h4>
@@ -438,7 +456,7 @@
 		<div style="border-top: 2px solid grey;"></div>
 		<div class="row">
 			<center>
-				<h3>Ablation Study</h3>
+				<h3 id="ablation">Ablation Study</h3>
 			</center>
 			<div class="utterance" data-utt-id="4507_16021_000028_000004" data-testset="testsetB-16k">
 				<h4>On ScheDFR</h4>
@@ -518,7 +536,7 @@
 		<div style="border-top: 2px solid grey;"></div>
 		<div class="row">
 			<center>
-				<h3>DFR Scheduling: Case Study</h3>
+				<h3 id="case-study">DFR Scheduling: Case Study</h3>
 			</center>
 			<p>
 				The figure below visually illustrates how the CodecSlime DFR scheduler operates on the
@@ -528,13 +546,11 @@
 				Here, the target downsample rate is 2, and the maximum downsample segment length is 4.
 			</p>
 			<p>
-				As shown, the scheduler adaptively merges frames in regions of long pauses or steady vowels, effectively
-				exploiting temporal redundancy.
-				It also captures "counterintuitive" compression strategies across phoneme boundaries when beneficial for
-				reconstruction.
-				This example highlights CodecSlime's strength: instead of relying on handcrafted heuristics, it plans
-				downsampling directly from the learned representation space—enabling big bitrate reduction while
-				preserving perceptual quality.
+				As shown in the figure, long silences or sustained vowels are often assigned longer segments, indicating that the learned schedule effectively captures temporal redundancy. 
+				However, we also observe that many segments span across phonetic boundaries, suggesting that optimal compression strategies cannot be directly inferred from linguistic structure alone. 
+				Instead, they emerge from fine-grained frame-level acoustic similarity, which is nontrivial to design manually. 
+				During the Melt stage, the model is exposed to diverse merging patterns and learns empirically effective segmentations—even if they appear counter-intuitive linguistically. 
+				This supports the necessity of our two-stage melt-and-cool training and highlights the strength of scheduling directly in the latent space without relying on handcrafted heuristics.
 			</p>
 			<!-- <p>For more examples, please refer to <b>the Appendix of our paper (in the supplementary material)</b>.</p> -->
 			<center>
@@ -547,13 +563,26 @@
 				</table>
 			</center>
 
+			<p>
+				The figure below shows another example 7021_79740_000011_000000 utterance, where similar patterns are observed.
+			</p>
+			<center>
+				<table>
+					<tbody style="width:100%;">
+						<tr>
+							<td><img src="figures/example_7021_79740_000011_000000.png" width="900"></td>
+						</tr>
+					</tbody>
+				</table>
+			</center>
+
 		</div>
 
 		
 		<div style="border-top: 2px solid grey;"></div>
 		<div class="row">
 			<center>
-				<h3>Illustration of Melt-and-Cool</h3>
+				<h3 id="melt-and-cool">Illustration of Melt-and-Cool</h3>
 			</center>
 			<p>
 				Our Melt-and-Cool recipe adapts an FFR backbone to ScheDFR using a simple two-stage process. 
@@ -561,12 +590,20 @@
 			</p>
 			<p>
 				the Melt phase introduces random temporal downsampling on the encoder features <b>(②)</b>, 
-				controlled by a scheduler that adjusts the sampling proportion over training <b>(③)</b>. 
+				where the input is obtained through random cropping of fixed-duration speech segments (1 second).
+				Training begins with no downsampling (i.e., each frame is kept as-is), and as training progresses, 
+				the proportion of downsampled segments gradually increases according to a target schedule.
+				The downsampling schemes follow a specified proportion of segment lengths while maintaining random segment ordering, 
+				controlled by the Melt scheduler that adjusts the sampling proportion over training <b>(③)</b>. 
 				This produces a DFR foundation model that supports many downsampling patterns <b>(④)</b>. 
 			</p>
 			<p>
 				In the Cool phase, we fine-tune this model with DP-computed optimal schemes <b>(⑤)</b>, 
-				freezing the encoder and updating only the quantizer and decoder to stabilize learning. 
+				where the input is also obtained through random cropping of fixed-duration speech segments (1 second).
+				We no longer use random downsampling but instead use only optimal downsample schemes 
+				computed via the DP-based scheduler for each training utterance under given target parameters.
+				We freeze the encoder parameters and update only the quantizer and decoder to stabilize learning.
+				To ensure model generalization and stability, each input still has a 30% probability of bypassing downsampling.
 				The final result is a DFR model fine-tuned for the target ScheDFR setup <b>(⑥)</b>.
 			</p>
 			<!-- <p>For more examples, please refer to <b>the Appendix of our paper (in the supplementary material)</b>.</p> -->
@@ -579,6 +616,48 @@
 					</tbody>
 				</table>
 			</center>
+
+			<h4>Details of the Melt Manager</h4>
+			<p>
+				To further enhance the model's adaptability to diverse downsampling rates and schemes, the Melt manager samples from a constructed Dirichlet distribution, enabling the proportion vector <b>p</b> to evolve from "easy to hard" scenarios while maintaining randomness.
+				After reaching the preset target distribution <b>p</b><sub>tgt</sub>, the concentration of the Dirichlet distribution is slowly reduced.
+				Additionally, we set a certain probability (typically 50%) for the input utterance to undergo no downsampling, ensuring the model's capability does not deviate excessively.
+			</p>
+			<p>
+				<strong>Algorithm: Random-proportion downsampling sample process of the Melt manager</strong>
+			</p>
+			<div style="background-color: #f5f5f5; padding: 15px; border-left: 4px solid #76b900; margin: 10px 0; font-family: 'Courier New', monospace; font-size: 14px;">
+				<p><strong>Input:</strong> training step <em>g</em>, max rate <em>U</em>, target steps <em>S<sub>p</sub></em>, target mix <b>p</b><sub>tgt</sub> ∈ ℝ<sup><em>U</em></sup>, skip probability <em>ρ</em>, concentration control <em>c</em>, small constant <em>ε</em></p>
+				<p><strong>Output:</strong> Segment lengths proportions <b>p</b> or None</p>
+				<ol style="margin-left: 20px; padding-left: 10px;">
+					<li><em>u</em> ← Uniform(0, 1)</li>
+					<li><strong>if</strong> <em>u</em> < <em>ρ</em> <strong>then return</strong> None</li>
+					<li><em>π</em> ← min(<em>g</em>/<em>S<sub>p</sub></em>, 1) <span style="color: #666;">// training progress</span></li>
+					<li><b>d</b> ← <em>π</em> · <b>p</b><sub>tgt</sub></li>
+					<li><em>d<sub>U</sub></em> ← 1 − Σ<sub><em>i</em>=1</sub><sup><em>U</em>-1</sup> <em>d<sub>i</sub></em> <span style="color: #666;">// enforce sum-to-1</span></li>
+					<li><b>d</b> ← max(<b>d</b>, <em>ε</em>) <span style="color: #666;">// avoid zeros</span></li>
+					<li><b>α</b> ← <b>d</b> · <em>c</em> / (max(1, <em>g</em>/<em>S<sub>p</sub></em>))<sup>2.5</sup></li>
+					<li><b>p</b> ← Dirichlet(<b>α</b>)</li>
+					<li><strong>return</strong> <b>p</b></li>
+				</ol>
+			</div>
+			<p>
+				<strong>Symbol legend:</strong>
+			</p>
+			<ul>
+				<li><b>g</b>: the current training step</li>
+				<li><b>S<sub>p</sub></b>: the number of steps required to reach the target proportion <b>p</b><sub>tgt</sub> (typically 10<sup>5</sup> steps)</li>
+				<li><b>ρ</b> (rho): the probability of performing no downsampling (typically 0.5, i.e., 50%)</li>
+				<li><b>c</b>: controls how sharply the Dirichlet samples cluster and decays with training (typically 30.0)</li>
+				<li><b>ε</b> (epsilon): a small value to prevent zero entries in <b>d</b> (typically 1.0 × 10<sup>-6</sup>)</li>
+				<li><b>π</b> (pi): the training progress factor from 0 to 1</li>
+				<li><b>d</b>: the progress-weighted blend between an "all-ones" (no downsampling) mix and the target mix <b>p</b><sub>tgt</sub></li>
+				<li><b>α</b> (alpha): the Dirichlet <em>concentration</em> parameter derived from <b>d</b> and <b>c</b></li>
+				<li><b>p</b>: the vector of per-rate proportions sampled for the current mini-batch</li>
+			</ul>
+			<p>
+				<strong>Hyperparameters:</strong> Maximum downsampling rate <b>U</b> = 4, target mix <b>p</b><sub>tgt</sub> over rates [1,2,3,4] = [0.1, 0.45, 0.25, 0.2], steps to reach target proportions <b>S<sub>p</sub></b> = 10<sup>5</sup>, concentration control parameter <b>c</b> = 30.0, small constant <b>ε</b> = 1.0 × 10<sup>-6</sup>, and skip probability <b>ρ</b> = 0.5.
+			</p>
 
 		</div>
 

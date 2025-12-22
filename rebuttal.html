@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>CodecSlime - Rebuttal Supplementary</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<style>
+		body {
+			background-color: #ffffff;
+			color: #2c3e50;
+			font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+			line-height: 1.6;
+		}
+		.container {
+			max-width: 960px;
+			margin: 40px auto;
+			padding: 40px;
+			background-color: #fff;
+			/* box-shadow: 0 0 20px rgba(0,0,0,0.05); */
+			/* border-radius: 8px; */
+		}
+		h2 {
+			color: #c0392b;
+			margin-bottom: 40px;
+			font-weight: 700;
+			letter-spacing: -0.5px;
+			border-bottom: 2px solid #c0392b;
+			padding-bottom: 15px;
+			display: inline-block;
+		}
+		h4 {
+			margin-top: 50px;
+			margin-bottom: 20px;
+			font-weight: 600;
+			color: #34495e;
+			border-left: 5px solid #c0392b;
+			padding-left: 15px;
+			font-size: 20px;
+		}
+		p, li {
+			font-size: 16px;
+			color: #444;
+		}
+		.v-center {
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+		.back-link {
+			display: inline-block;
+			margin-bottom: 30px;
+			font-size: 15px;
+			color: #7f8c8d;
+			text-decoration: none;
+			border: 1px solid #ecf0f1;
+			padding: 8px 15px;
+			border-radius: 20px;
+			transition: all 0.2s;
+		}
+		.back-link:hover {
+			background-color: #f9f9f9;
+			color: #c0392b;
+			text-decoration: none;
+			border-color: #c0392b;
+		}
+		figure {
+			margin: 30px 0;
+			text-align: center;
+		}
+		figcaption {
+			font-style: italic;
+			color: #7f8c8d;
+			margin-top: 12px;
+			font-size: 14px;
+		}
+		img {
+			border-radius: 4px;
+			box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+		}
+		.algo-box {
+			background-color: #f8f9fa;
+			padding: 20px;
+			border-left: 4px solid #27ae60;
+			font-family: 'Consolas', 'Monaco', monospace;
+			font-size: 13px;
+			margin-top: 20px;
+			border-radius: 0 4px 4px 0;
+			color: #2c3e50;
+		}
+		.highlight-box {
+			background-color: #fdf2f1;
+			border: 1px solid #fadbd8;
+			padding: 15px;
+			border-radius: 6px;
+			margin-bottom: 25px;
+		}
+		hr {
+			margin-top: 50px;
+			margin-bottom: 30px;
+			border-top: 1px solid #ecf0f1;
+		}
+		.ref-list {
+			font-size: 14px;
+			color: #7f8c8d;
+			padding-left: 20px;
+		}
+		.section-box {
+			border: 1px solid #e0e0e0;
+			border-radius: 8px;
+			padding: 30px;
+			margin-bottom: 30px;
+			background-color: #fff;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+		}
+		.section-box h4 {
+			margin-top: 0;
+		}
+		.toc-box {
+			background-color: #f8f9fa;
+			padding: 20px;
+			border-radius: 6px;
+			border: 1px solid #e9ecef;
+			margin-bottom: 30px;
+		}
+		.toc-box h4 {
+			margin-top: 0;
+			border-left: none;
+			padding-left: 0;
+			margin-bottom: 10px;
+			font-size: 18px;
+			color: #2c3e50;
+		}
+		.toc-box ul {
+			padding-left: 20px;
+			margin-bottom: 0;
+		}
+		.toc-box li {
+			margin-bottom: 5px;
+		}
+		.toc-box a {
+			color: #2980b9;
+			text-decoration: underline;
+			font-weight: 600;
+		}
+		.toc-box a:hover {
+			color: #c0392b;
+			text-decoration: underline;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+		<a href="index.html" class="back-link">← Back to Full Project Page (Demos & Details)</a>
+
+		<center>
+			<h2>ICASSP 2026 Rebuttal Supplementary Material</h2>
+		</center>
+
+		<div class="highlight-box">
+			<p style="margin-bottom: 0;">
+				This page provides supplementary figures and detailed results referenced in our rebuttal response.
+				For audio demos and the complete project description, please visit the <a href="index.html" style="color: #c0392b; font-weight: bold;">main project page</a>.
+			</p>
+		</div>
+
+		<!-- TOC -->
+		<div class="toc-box">
+			<h4>Table of Contents</h4>
+			<ul>
+				<li><a href="#sec-baselines">1. Updated Baselines & MUSHRA (Reviewers 305E & 3899)</a></li>
+				<li><a href="#sec-melt-cool">2. Melt-and-Cool Details (Reviewer 3899)</a></li>
+				<li><a href="#sec-vis">3. Interpretability & Visualization (Reviewer 1D71)</a></li>
+				<li><a href="#sec-generalization">4. Generalization across Frame Rates (Reviewers 3899 & 1D71)</a></li>
+			</ul>
+		</div>
+
+		<!-- 1. Updated Baselines -->
+		<div class="section-box" id="sec-baselines">
+			<h4>1. Updated Baselines & MUSHRA (Response to Reviewers 305E & 3899)</h4>
+			<p>
+				We have updated Table 1 to include comparisons with two variable frame rate tokens: <strong>TFC[24]</strong> (Interspeech' 25) and <strong>VARSTok[39]</strong> (AAAI' 26), and provided new MUSHRA scores for the retrained FSQ model.
+				Additionally, the FSQ model has been updated to match the VQ model in fine-tuning steps (both 110k). Both models demonstrate significant improvements in objective and subjective metrics compared to all baselines.
+			</p>
+			<center>
+				<figure>
+					<img src="figures/main_table.png" style="max-width: 100%;">
+					<figcaption><strong>Table 1 (Updated):</strong> Reconstruction results including TFC[24], VARSTok[39], and new MUSHRA scores.</figcaption>
+				</figure>
+			</center>
+			<ul>
+				<li><strong>Comparison with TFC[24]:</strong> At similar bitrates (TFC 0.75kbps vs CodecSlime ~0.6kbps), CodecSlime achieves significantly higher quality (PESQ 2.02 vs 1.28).</li>
+				<li><strong>Comparison with VARSTok[39]:</strong> Both CodecSlime-VQ8k (84.01±1.59) and CodecSlime-FSQ18k (81.24±1.88) achieve higher MUSHRA scores than VARSTok (77.37±2.24).</li>
+				<li><strong>FSQ Comparison:</strong> The retrained CodecSlime-FSQ18k (81.24±1.88) shows clear gains over FFR (77.03±1.92).</li>
+			</ul>
+		</div>
+
+		<!-- 2. Melt-and-Cool Details -->
+		<div class="section-box" id="sec-melt-cool">
+			<h4>2. Melt-and-Cool Details (Response to Reviewer 3899)</h4>
+			
+			<!-- Row 1: Recipe & Figure -->
+			<div class="row v-center">
+				<div class="col-md-6">
+					<p>
+						The <strong>Melt-and-Cool</strong> recipe adapts an FFR backbone to ScheDFR in two stages:
+					</p>
+					<ol>
+						<li><strong>Melt Phase (②-④):</strong> Introduces random temporal downsampling on encoder features. The proportion of downsampled segments increases gradually according to a target schedule controlled by the <strong>Melt Manager</strong>. This builds a robust DFR foundation.</li>
+						<li><strong>Cool Phase (⑤-⑥):</strong> Fine-tunes the model using optimal schemes computed by the DP-based scheduler. We freeze the encoder and update only the quantizer and decoder.</li>
+					</ol>
+				</div>
+				<div class="col-md-6">
+					<figure style="margin-top: 0;">
+						<img src="figures/melt-and-cool-illu.png" style="width: 100%;">
+						<figcaption>Illustration of Melt-and-Cool.</figcaption>
+					</figure>
+				</div>
+			</div>
+
+			<!-- Row 2: Algo & Box -->
+			<div class="row v-center" style="margin-top: 30px;">
+				<div class="col-md-6">
+					<p>
+						<strong>Melt Manager Algorithm:</strong> Samples downsampling proportions <b>p</b> from a Dirichlet distribution that evolves from "easy" (mostly no downsampling) to "hard" (target mix) scenarios.
+					</p>
+					<p style="font-size: 14px; color: #666; margin-top: 20px;">
+						<strong>Hyperparameters:</strong><br>
+						Max rate <em>U</em>=4<br>
+						Target mix <b>p</b><sub>tgt</sub>=[0.1, 0.45, 0.25, 0.2]<br>
+						Steps <em>S<sub>p</sub></em>=10<sup>5</sup><br>
+						Concentration <em>c</em>=30.0<br>
+						Skip prob <em>ρ</em>=0.5
+					</p>
+				</div>
+				<div class="col-md-6">
+					<div class="algo-box" style="margin-top: 0;">
+						<strong>Input:</strong> step <em>g</em>, max rate <em>U</em>, target <b>p</b><sub>tgt</sub>, skip prob <em>ρ</em><br>
+						<strong>Output:</strong> Proportions <b>p</b><br>
+						1. <em>u</em> ← Uniform(0, 1); <strong>if</strong> <em>u</em> < <em>ρ</em> <strong>return</strong> None<br>
+						2. <em>π</em> ← min(<em>g</em>/<em>S<sub>p</sub></em>, 1); <b>d</b> ← <em>π</em> · <b>p</b><sub>tgt</sub><br>
+						3. <em>d<sub>U</sub></em> ← 1 − Σ <em>d<sub>i</sub></em>; <b>d</b> ← max(<b>d</b>, <em>ε</em>)<br>
+						4. <b>α</b> ← <b>d</b> · <em>c</em> / (max(1, <em>g</em>/<em>S<sub>p</sub></em>))<sup>2.5</sup><br>
+						5. <b>p</b> ← Dirichlet(<b>α</b>); <strong>return</strong> <b>p</b>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 3. Visualization -->
+		<div class="section-box" id="sec-vis">
+			<h4>3. Interpretability & Visualization (Response to Reviewer 1D71)</h4>
+			<p>
+				The figure below visually illustrates how the CodecSlime DFR scheduler operates on two utterances from the LibriTTS test-clean set.
+				The top waveform aligns with the forced phoneme sequence, while the black-and-white bar below depicts
+				the model's predicted frame-reduction pattern.
+				Here, the target downsample rate is 2, and the maximum downsample segment length is 4.
+			</p>
+			
+			<div style="overflow-x: auto; white-space: nowrap; padding-bottom: 15px; -webkit-overflow-scrolling: touch;">
+				<div style="display: inline-block; width: 90%; margin-right: 20px; vertical-align: top;">
+					<figure style="margin: 0;">
+						<img src="figures/example_237_126133_000002_000004.png" style="width: 100%;">
+						<figcaption>Example 1: 237_126133_000002_000004</figcaption>
+					</figure>
+				</div>
+				<div style="display: inline-block; width: 90%; vertical-align: top;">
+					<figure style="margin: 0;">
+						<img src="figures/example_7021_79740_000011_000000.png" style="width: 100%;">
+						<figcaption>Example 2: 7021_79740_000011_000000</figcaption>
+					</figure>
+				</div>
+			</div>
+
+			<p>
+				As shown in the figure, long silences or sustained vowels are often assigned longer segments, indicating that the learned schedule effectively captures temporal redundancy. 
+				However, we also observe that many segments span across phonetic boundaries, suggesting that optimal compression strategies cannot be directly inferred from linguistic structure alone. 
+				Instead, they emerge from fine-grained frame-level acoustic similarity, which is nontrivial to design manually. 
+				During the Melt stage, the model is exposed to diverse merging patterns and learns empirically effective segmentations—even if they appear counter-intuitive linguistically. 
+				This supports the necessity of our two-stage melt-and-cool training and highlights the strength of scheduling directly in the latent space without relying on handcrafted heuristics.
+			</p>
+		</div>
+
+		<!-- 4. Generalization -->
+		<div class="section-box" id="sec-generalization">
+			<h4>4. Generalization across Frame Rates (Response to Reviewers 3899 & 1D71)</h4>
+			<p>
+				<strong>Fig. 2</strong> in the paper demonstrates that a <em>single</em> CodecSlime model supports multiple inference-time frame rates (e.g., 40Hz to 80Hz) and consistently outperforms FFR baselines that are specifically trained for each rate. 
+            </p>
+            <p>
+                Note that the FFR baselines are a series of separately trained models, each optimized for a fixed frame rate.
+			</p>
+			<center>
+				<figure>
+					<img src="figures/wer_pesq_vs_frame_rate_with_ffr_fsq.png" style="max-width: 60%;">
+					<figcaption><strong>Fig. 2 (in the original paper):</strong> WER and PESQ performance across different frame rates. CodecSlime (red line) consistently beats FFR (blue line).</figcaption>
+				</figure>
+			</center>
+		</div>
+
+		<hr>
+		<h4>References</h4>
+		<ul class="ref-list">
+			<li>[24] Zhang, Hanglei, et al. "Unlocking Temporal Flexibility: Neural Speech Codec with Variable Frame Rate." arXiv preprint arXiv:2505.16845 (2025).</li>
+			<li>[39] Zheng, Rui-Chen, et al. "Say More with Less: Variable-Frame-Rate Speech Tokenization via Adaptive Clustering and Implicit Duration Coding." arXiv preprint arXiv:2509.04685 (2025).</li>
+		</ul>
+
+	</div>
+</body>
+</html>

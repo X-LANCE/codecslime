@@ -2,3 +2,6 @@
 *.backup.*
 ICASSP_26__*
 *.old
+paper/
+.github/
+icassp*.md
