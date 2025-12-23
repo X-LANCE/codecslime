@@ -191,7 +191,7 @@
 			<center>
 				<figure>
 					<img src="figures/main_table.png" style="max-width: 100%;">
-					<figcaption><strong>Table 1 (Updated):</strong> Reconstruction results including TFC[24], VARSTok[39], and new MUSHRA scores.</figcaption>
+					<figcaption><strong>Table 1 (Updated):</strong> Reconstruction results including TFC[24], VARSTok[39], and new MUSHRA scores, <span style="color: #0330fc; font-weight: 700;">shown in blue</span>.</figcaption>
 				</figure>
 			</center>
 			<ul>
@@ -199,6 +199,10 @@
 				<li><strong>Comparison with VARSTok[39]:</strong> Both CodecSlime-VQ8k (84.01±1.59) and CodecSlime-FSQ18k (81.24±1.88) achieve higher MUSHRA scores than VARSTok (77.37±2.24).</li>
 				<li><strong>FSQ Comparison:</strong> The retrained CodecSlime-FSQ18k (81.24±1.88) shows clear gains over FFR (77.03±1.92).</li>
 			</ul>
+			
+			<p style="font-size: 12px; color: #666; margin-top: 25px; line-height: 1.5;">
+				<strong>New MUSHRA Test Details:</strong> Subjective MUSHRA test (ITU-R BS.1534) with 21 participants, where each subject evaluates 7 utterances (from the testset) across 9 systems: one ground truth reference, one anchor (SNAC), and 7 models (VARSTok, BigCodec-VQ8k, BigCodec-VQ18k, CodecSlime-VQ8k, BigCodec-FSQ18k, BigCodec-FSQ84k, CodecSlime-FSQ18k). The candidate number is limited to 9 to avoid excessive cognitive load and ensure reliable listener ratings within a practical evaluation time. Scores are collected on a 0–100 scale in blind listening.
+			</p>
 		</div>
 
 		<!-- 2. Melt-and-Cool Details -->
