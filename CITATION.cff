@@ -1,0 +1,48 @@
+cff-version: 1.2.0
+message: "If you use CodecSlime, please cite the ICASSP 2026 paper."
+title: CodecSlime
+type: software
+version: 0.1.0
+date-released: "2026-08-14"
+license: MIT
+authors:
+  - family-names: Wang
+    given-names: Hankun
+  - family-names: Guo
+    given-names: Yiwei
+  - family-names: Shao
+    given-names: Chongtian
+  - family-names: Li
+    given-names: Bohan
+  - family-names: Yu
+    given-names: Kai
+repository-code: "https://github.com/X-LANCE/codecslime"
+url: "https://x-lance.github.io/codecslime/"
+preferred-citation:
+  type: conference-paper
+  title: "CodecSlime: Temporal Redundancy Compression of Neural Speech Codec via Dynamic Frame Rate"
+  authors:
+    - family-names: Wang
+      given-names: Hankun
+    - family-names: Guo
+      given-names: Yiwei
+    - family-names: Shao
+      given-names: Chongtian
+    - family-names: Li
+      given-names: Bohan
+    - family-names: Yu
+      given-names: Kai
+  collection-title: "ICASSP 2026 - 2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)"
+  conference:
+    name: "2026 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)"
+    date-start: "2026-05-04"
+    date-end: "2026-05-08"
+    location: "Barcelona, Spain"
+  publisher:
+    name: IEEE
+  year: 2026
+  month: 5
+  start: 17017
+  end: 17021
+  doi: 10.1109/ICASSP55912.2026.11463766
+  url: "https://doi.org/10.1109/ICASSP55912.2026.11463766"

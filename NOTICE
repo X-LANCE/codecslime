@@ -1,0 +1,16 @@
+CodecSlime
+Copyright (c) 2025-2026 CodecSlime Authors
+
+This release derives its codec backbone implementation from BigCodec by Xin
+Detai, distributed under the MIT License.
+
+The alias-free activation and resampling implementation under
+src/codecslime/nn/alias_free is adapted from alias-free-torch by Junjun Shi,
+distributed under the Apache License 2.0, and includes techniques/code adapted
+from julius and Snake under their respective permissive licenses.
+
+The finite scalar quantization implementation is adapted from the public FSQ
+reference implementation associated with "Finite Scalar Quantization: VQ-VAE
+Made Simple" (Mentzer et al., 2023).
+
+Third-party package licenses continue to apply to their respective packages.

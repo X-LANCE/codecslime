@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codecslime"
+version = "0.1.0"
+description = "Inference code for CodecSlime, a dynamic-frame-rate neural speech codec."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+  {name = "Hankun Wang"},
+  {name = "Yiwei Guo"},
+  {name = "Chongtian Shao"},
+  {name = "Bohan Li"},
+  {name = "Kai Yu"},
+]
+dependencies = [
+  "einops>=0.8",
+  "numpy>=1.24",
+  "safetensors>=0.4",
+  "soundfile>=0.12",
+  "torch>=2.1",
+  "torchaudio>=2.1",
+]
+
+[project.urls]
+Paper = "https://arxiv.org/abs/2506.21074"
+Demo = "https://x-lance.github.io/codecslime/"
+Repository = "https://github.com/X-LANCE/codecslime"
+
+[project.scripts]
+codecslime = "codecslime.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
