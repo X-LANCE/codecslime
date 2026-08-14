@@ -3,39 +3,38 @@
 
 <head>
 	<meta charset="UTF-8">
-
 	<title>CodecSlime</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<meta name="description" content="CodecSlime audio samples and experimental results.">
 	<link rel="stylesheet" href="styles.css">
-
-	<!-- Latest compiled and minified Bootstrap CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-		integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-	<link rel="stylesheet" type="text/css" href="style_examples.css">
-
 </head>
 
 <body>
-
-	<div class="container">
-		<center>
-			<h1>CodecSlime: Temporal Redundancy Compression of Neural Speech Codec via Dynamic Frame Rate</h1>
-			<!-- <h4 style="text-align: center">Anonymous Authors</h4> -->
-			<!-- <h4>Submitted to ICASSP 2026</h4> -->
-		</center>
-
-		<div style="border: 1px solid black; margin-top: 20px; margin-bottom: 10px;"></div>
-
-		<div style="display: flex; align-items: flex-start; gap: 10px;">
-			<div style="flex: 4;">
-				<center>
-					<img src="figures/opening.png" width="65%">
-				</center>
+	<nav class="topbar" aria-label="Primary navigation">
+		<div class="topbar-inner">
+			<a class="brand" href="#top">CodecSlime</a>
+			<div class="topbar-links">
+				<a href="#main-results">Audio samples</a>
+				<a href="https://arxiv.org/abs/2506.21074">Paper</a>
+				<a href="https://github.com/X-LANCE/codecslime">GitHub</a>
 			</div>
+		</div>
+	</nav>
 
-			<div style="flex: 3;">
+	<div class="container" id="top">
+		<header class="hero">
+			<p class="eyebrow">ICASSP 2026 · Neural speech codec</p>
+			<h1>CodecSlime: Temporal Redundancy Compression of Neural Speech Codec via Dynamic Frame Rate</h1>
+			<p class="authors">Hankun Wang · Yiwei Guo · Chongtian Shao · Bohan Li · Kai Yu</p>
+			<div class="hero-actions">
+				<a class="button button-primary" href="https://arxiv.org/abs/2506.21074">Read the paper</a>
+				<a class="button button-secondary" href="https://github.com/X-LANCE/codecslime">View code on GitHub</a>
+			</div>
+			<div class="hero-grid">
+				<div class="hero-figure">
+					<img src="figures/opening.png" alt="Comparison of fixed-frame-rate and CodecSlime dynamic-frame-rate coding">
+				</div>
+				<div class="hero-copy">
 				<p>
 					Current mainstream neural speech codecs are fixed-frame-rate (FFR),
 					which allocate the same number of tokens to every equal-duration slice.
@@ -49,20 +48,21 @@
 					<strong>ScheDFR</strong> and <strong>Melt-and-Cool</strong>, for adapting inference and training,
 					respectively.
 					When integrated into a typical VQ-GAN codec backbone and operating at 40Hz DFR (≈600bps),
-					the reconstruction WER of CodecSlime is reduced by up to 28% relative to conventional FFR baselines
+					the reconstruction WER of CodecSlime is reduced by up to 32% relative to conventional FFR baselines
 					with the same model architecture and similar bitrates, while other metrics are also competitive.
 					CodecSlime also enables flexible trade-offs between reconstruction quality and bitrate:
 					a single model supports inference at multiple frame rates and consistently outperforms FFR models
 					at the corresponding frame rates.
 				</p>
-				<span style="color: gray;">
+				<p class="figure-note">
 					Left figure: Comparison of: (a) conventional 40 Hz fixed-rate model,<br>
 					(b) 80 Hz fixed-rate model with naive fix-rate downsampling, and<br>
 					(c) CodecSlime-integrated model, which combines Melt-and-Cool
 					training with ScheDFR for inference, achieving the lowest WER.
-				</span>
+				</p>
+				</div>
 			</div>
-		</div>
+		</header>
 
 		<!-- Table of Contents -->
 		<div class="row" style="margin-top: 20px;">
